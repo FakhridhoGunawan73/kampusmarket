@@ -2,13 +2,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { PaperProvider } from "react-native-paper";
 
 import StackNavigator from "./src/navigation/StackNavigator";
+import { AuthProvider } from "./src/context/AuthContext";
 
 export default function App() {
   return (
     <PaperProvider>
-      <NavigationContainer>
-        <StackNavigator />
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+      </AuthProvider>
     </PaperProvider>
   );
 }

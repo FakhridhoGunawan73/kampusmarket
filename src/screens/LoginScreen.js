@@ -1,10 +1,22 @@
 import { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Text, TextInput, Button } from "react-native-paper";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginScreen() {
+  const { login } = useAuth(); // ✅ HARUS DI SINI
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    if (!email.trim() || !password.trim()) {
+      Alert.alert("Validasi", "Email dan Password wajib diisi.");
+      return;
+    }
+
+    login();
+  };
 
   return (
     <View style={styles.container}>
@@ -33,10 +45,7 @@ export default function LoginScreen() {
         style={styles.input}
       />
 
-      <Button
-        mode="contained"
-        style={styles.button}
-      >
+      <Button mode="contained" style={styles.button} onPress={handleLogin}>
         Login
       </Button>
     </View>
